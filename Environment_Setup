@@ -1,0 +1,102 @@
+Environment Setup
+
+## Objective
+Install Oracle VirtualBox and configure the VSD workshop VDI on a Windows host machine.
+
+---
+
+## System Requirements
+
+| Component | Minimum Required | My Machine |
+|-----------|------------------|------------|
+| Free Disk Space | 100 GB | ___ GB |
+| RAM | 8 GB | ___ GB |
+| CPU Cores | 2 | ___ cores |
+| OS | Windows 10/11 | Windows ___ |
+
+---
+
+## Step 1: Download VirtualBox
+
+| Property | Value |
+|----------|-------|
+| **Tool** | Oracle VirtualBox |
+| **Version** | 7.2.14 |
+| **Downloaded From** | virtualbox.org/wiki/Downloads |
+| **Installer File** | `VirtualBox-7.2.14-Win.exe` |
+
+---
+
+## Step 2: Install Dependencies
+
+### Issue 1: Microsoft Visual C++ 2019 Redistributable Missing
+
+**Error Message:**
+&gt; "Oracle VirtualBox 7.2.14 needs the Microsoft Visual C++ 2019 Redistributable Package being installed first."
+
+**Solution:**
+1. Downloaded `vc_redist.x64.exe` from official Microsoft website
+2. Installed the package
+3. **Restarted the computer** (required)
+4. Re-ran the VirtualBox installer
+
+---
+
+### Issue 2: Python Bindings Warning
+
+**Warning Message:**
+&gt; "Missing Dependencies — Python Core package and win32api bindings to be installed."
+
+**Solution:** Clicked **Yes** to continue.
+
+&gt; **Note:** This is an optional dependency. It does not affect the VM's ability to run the VDI.
+
+---
+
+## Step 3: Create the Virtual Machine
+
+### VM Configuration
+
+| Setting | Value |
+|---------|-------|
+| **Name** | `vsdworkshop` |
+| **Type** | Linux |
+| **Version** | Ubuntu 18.04 LTS (64-bit) |
+| **Base Memory** | 4096 MB (4 GB) |
+| **Processors** | 4 CPUs |
+| **Hard Disk** | Use existing virtual hard disk file |
+| **VDI File** | `openlane.vdi` |
+
+---
+
+## Step 4: Fix "No Bootable Medium" Error
+
+**Error Message:**
+&gt; "No bootable medium found! Please insert a bootable medium and reboot."
+
+**Root Cause:** The VDI file was not properly attached to the SATA controller.
+
+**Solution:**
+1. Powered off the VM
+2. Opened **Settings → Storage**
+3. Attached the VDI file to the **SATA controller**
+4. Opened **Settings → System → Boot Order**
+5. Made sure **Hard Disk** is checked and at the top priority
+
+---
+
+## Step 5: Fix No Internet / No WiFi Adapter in VM
+
+**Issue:** No WiFi adapter visible inside Ubuntu VM.
+
+**Root Cause:** VirtualBox VMs use virtual Ethernet (not WiFi). The network adapter was disabled.
+
+**Solution:**
+1. Powered off the VM completely
+2. Opened **Settings → Network**
+3. Enabled **Adapter 1**
+4. Set **Attached to:** `NAT`
+5. Started the VM
+6. Verified connectivity inside VM:
+   ```bash
+   ping google.com
