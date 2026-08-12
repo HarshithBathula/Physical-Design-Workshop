@@ -52,6 +52,3 @@ If you need internet inside the VM (e.g., to clone a GitHub repository or instal
 
 
 
-## 4. OPENLANE
-
-
