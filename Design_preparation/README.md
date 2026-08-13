@@ -28,4 +28,7 @@ From the OpenLane working directory:
 docker
 ./flow.tcl -interactive
 ```
-https://github.com/HarshithBathula/Physical-Design-Workshop/blob/0463d589e64ae98eec5253220d961ad1b9550304/Design_preparation/Open%20Lane%20sucess.png
+<img width="610" height="287" alt="docker setup" src="https://github.com/user-attachments/assets/4a8937af-6587-4ab8-bde7-2c4ab6c295fe" />
+
+<img width="1536" height="713" alt="Open Lane sucess" src="https://github.com/user-attachments/assets/7eb72e14-34ab-4bb0-bfce-8b4d3ae81aff" />
+
